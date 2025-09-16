@@ -3,10 +3,9 @@
 ---
 
 ## 1 – **Objetivo do Projeto**
-👥 6 participantes  
+👥 4 participantes  
 📂 1 repositório no GitHub  
-🌿 1 branch por pessoa (HTML individual)  
-🎨 Arquivos **CSS e JS compartilhados**  
+🌿 1 branch por pessoa (HTML individual)
 
 ---
 
@@ -30,20 +29,13 @@
 ```
 📂mini_hackaton
 │── 📂css
-│    └── 📄style.css   (compartilhado)
+│    └── 📄style.css 
 │── 📂js
-│    └── 📄script.js   (compartilhado)
+│    └── 📄script.js
 │── 📂static
 │    └── 📄?
 │── 📂templates
-│    │── 📄aristoteles.html
-│    │── 📄base.html
-│    │── 📄bruno.html
-│    │── 📄gustavo.html
-│    │── 📄hudson.html
-│    │── 📄index.html
-│    │── 📄matheus.html
-│    └── 📄renato.html
+│    └── 📄index.html
 │── 📄.gitattributes
 │── 📄.gitignore
 │── 📄LICENCE
