@@ -145,6 +145,13 @@ body {
 .dropdown:hover .dropdown-menu {
     display: block;
 }
+:target {
+    scroll-margin-top: 150px; /* Use a altura do seu cabeçalho aqui */
+}
+
+html {
+    scroll-behavior: smooth;
+}
 /*Final CSS base.html*/
 /*--------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -160,13 +167,239 @@ body {
     height: auto; /* Mantém a proporção da imagem para que ela não fique distorcida */
     display: block; /* Remove o espaço extra abaixo da imagem que alguns navegadores adicionam */
 }
+
+.intro-card {
+max-width: 900px;
+margin: 24px auto;
+padding: 20px;
+border-radius: 12px;
+box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+line-height: 1.45;
+background: #ffffff;
+}
+
+
+.intro-card h1 {
+margin-top: 0;
+font-size: 1.5rem;
+color: #0b3b66;
+text-align: center;
+}
+
+
+.intro-card h2 {
+font-size: 1.05rem;
+margin-bottom: 8px;
+color: #0b5978;
+}
+
+.intro-card h2.centered {
+  text-align: center;
+}
+
+
+.intro-card p {
+margin: 12px 0 18px;
+color: #334e68;
+}
+
+
+.intro-card ul {
+margin: 0 0 16px 18px;
+color: #2f4f62;
+}
+
+
+.intro-card .note {
+margin: 0;
+color: #536b7a;
+font-size: 0.95rem;
+}
+
 /*Final CSS index.html*/
 /*--------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
 /*RENATO*/
+.carousel-container {
+      max-width: 860px;
+      margin: 40px auto 0;
+      padding: 20px 0 60px;
+      position: relative;
+    }
+    .carousel-viewport {
+      perspective: 1200px;
+      overflow: visible;
+      height: 420px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .carousel-track {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+      position: relative;
+    }
+    .carousel-slide {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%) scale(0.7);
+      opacity: 0.4;
+      transition: 
+        transform 0.7s cubic-bezier(.77,0,.18,1), 
+        opacity 0.5s, 
+        z-index 0.2s;
+      z-index: 1;
+      width: 350px;
+      height: 380px;
+      border-radius: 24px;
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 6px 28px rgba(25,50,100,.25);
+      cursor: pointer;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
+    /* Overlay para o texto */
+    .carousel-slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      opacity: 0;
+      transition: opacity .4s;
+    }
+    .carousel-slide:hover::before {
+      opacity: 1;
+    }
 
+    .carousel-slide div {
+      position: absolute;
+      text-align: center;
+      color: #fff;
+      opacity: 0;
+      transition: opacity .5s;
+      padding: 20px;
+      z-index: 2;
+    }
+    .carousel-slide:hover div {
+      opacity: 1;
+    }
+
+    .carousel-slide h3 {
+      margin: 0 0 10px;
+      font-size: 1.4em;
+    }
+    .carousel-slide p {
+      font-size: 1em;
+      margin: 0;
+    }
+
+    /* Slide ativo */
+    .carousel-slide.active {
+      transform: translate(-50%,-50%) scale(1) rotateY(0deg);
+      opacity: 1;
+      z-index: 10;
+      box-shadow: 0 10px 42px rgba(33,98,138,.25);
+    }
+    /* Slide anterior */
+    .carousel-slide.prev {
+      transform: translate(-130%,-55%) scale(0.85) rotateY(28deg);
+      opacity: 0.7;
+      z-index: 5;
+    }
+    /* Slide próximo */
+    .carousel-slide.next {
+      transform: translate(30%,-55%) scale(0.85) rotateY(-28deg);
+      opacity: 0.7;
+      z-index: 5;
+    }
+
+    /* Aumentar card no hover (somente no ativo) */
+    .carousel-slide.active:hover {
+      transform: translate(-50%,-50%) scale(1.3) rotateY(0deg);
+      z-index: 15;
+    }
+
+    .carousel-nav {
+      text-align: center;
+      margin-top: 24px;
+    }
+    .carousel-dot {
+      display: inline-block;
+      width: 13px;
+      height: 13px;
+      margin: 0 7px;
+      background: #b4dfef;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .carousel-dot.active {
+      background: #18a0fb;
+      box-shadow: 0 3px 9px #1ba0fb32;
+    }
+
+    /* Setas de navegação */
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      cursor: pointer;
+      font-size: 1.5em;
+      color: #22628a;
+      transition: all .3s;
+      z-index: 20;
+    }
+    .carousel-arrow:hover {
+      background: #18a0fb;
+      color: #fff;
+      transform: translateY(-50%) scale(1.1);
+    }
+    .carousel-arrow.prev { left: -60px; }
+    .carousel-arrow.next { right: -60px; }
+
+    @media (max-width:700px) {
+      .carousel-slide, .carousel-slide.active, .carousel-slide.prev, .carousel-slide.next { width: 95vw; max-width: 360px; }
+      .carousel-arrow.prev { left: 10px; }
+      .carousel-arrow.next { right: 10px; }
+    }
+
+    /* Texto abaixo do carrossel estilizado */
+    .impacto-section {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #18a0fb20, #22628a15);
+      border-radius: 18px;
+      box-shadow: 0 6px 28px rgba(25,50,100,.1);
+    }
+    .impacto-section h2 {
+      font-size: 2em;
+      margin-bottom: 15px;
+      color: #6a0dad;
+    }
+    .impacto-section p {
+      font-size: 1.15em;
+      line-height: 1.6;
+      color: #8a2be2;
+    }
 /*Final RENATO*/
 
 

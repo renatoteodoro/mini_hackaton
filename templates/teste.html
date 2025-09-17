@@ -1,0 +1,571 @@
+<!-- <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrossel 3D IA Telemarketing</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #ecf3fa;
+      margin: 0;
+      min-height: 100vh;
+    }
+    .carousel-container {
+      max-width: 860px;
+      margin: 40px auto 0;
+      padding: 20px 0 60px;
+      position: relative;
+    }
+    .carousel-viewport {
+      perspective: 1200px;
+      overflow: visible;
+      height: 420px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .carousel-track {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+      position: relative;
+    }
+    .carousel-slide {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%) scale(0.7);
+      opacity: 0.4;
+      transition: 
+        transform 0.7s cubic-bezier(.77,0,.18,1), 
+        opacity 0.5s, 
+        z-index 0.2s;
+      z-index: 1;
+      width: 350px;
+      height: 380px;
+      border-radius: 24px;
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 6px 28px rgba(25,50,100,.25);
+      cursor: pointer;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Overlay para o texto */
+    .carousel-slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      opacity: 0;
+      transition: opacity .4s;
+    }
+    .carousel-slide:hover::before {
+      opacity: 1;
+    }
+
+    .carousel-slide div {
+      position: absolute;
+      text-align: center;
+      color: #fff;
+      opacity: 0;
+      transition: opacity .5s;
+      padding: 20px;
+      z-index: 2;
+    }
+    .carousel-slide:hover div {
+      opacity: 1;
+    }
+
+    .carousel-slide h3 {
+      margin: 0 0 10px;
+      font-size: 1.4em;
+    }
+    .carousel-slide p {
+      font-size: 1em;
+      margin: 0;
+    }
+
+    /* Slide ativo */
+    .carousel-slide.active {
+      transform: translate(-50%,-50%) scale(1) rotateY(0deg);
+      opacity: 1;
+      z-index: 10;
+      box-shadow: 0 10px 42px rgba(33,98,138,.25);
+    }
+    /* Slide anterior */
+    .carousel-slide.prev {
+      transform: translate(-130%,-55%) scale(0.85) rotateY(28deg);
+      opacity: 0.7;
+      z-index: 5;
+    }
+    /* Slide próximo */
+    .carousel-slide.next {
+      transform: translate(30%,-55%) scale(0.85) rotateY(-28deg);
+      opacity: 0.7;
+      z-index: 5;
+    }
+
+    .carousel-nav {
+      text-align: center;
+      margin-top: 24px;
+    }
+    .carousel-dot {
+      display: inline-block;
+      width: 13px;
+      height: 13px;
+      margin: 0 7px;
+      background: #b4dfef;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .carousel-dot.active {
+      background: #18a0fb;
+      box-shadow: 0 3px 9px #1ba0fb32;
+    }
+
+    /* Setas de navegação */
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      cursor: pointer;
+      font-size: 1.5em;
+      color: #22628a;
+      transition: all .3s;
+      z-index: 20;
+    }
+    .carousel-arrow:hover {
+      background: #18a0fb;
+      color: #fff;
+      transform: translateY(-50%) scale(1.1);
+    }
+    .carousel-arrow.prev { left: -60px; }
+    .carousel-arrow.next { right: -60px; }
+
+    @media (max-width:700px) {
+      .carousel-slide, .carousel-slide.active, .carousel-slide.prev, .carousel-slide.next { width: 95vw; max-width: 360px; }
+      .carousel-arrow.prev { left: 10px; }
+      .carousel-arrow.next { right: 10px; }
+    }
+
+    /* Texto abaixo do carrossel estilizado */
+    .impacto-section {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #18a0fb20, #22628a15);
+      border-radius: 18px;
+      box-shadow: 0 6px 28px rgba(25,50,100,.1);
+    }
+    .impacto-section h2 {
+      font-size: 2em;
+      margin-bottom: 15px;
+      color: #22628a;
+    }
+    .impacto-section p {
+      font-size: 1.15em;
+      line-height: 1.6;
+      color: #37495a;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="carousel-container">
+    <button class="carousel-arrow prev" id="prevBtn">&#10094;</button>
+    <div class="carousel-viewport">
+      <div class="carousel-track" id="carousel-track">
+        <div class="carousel-slide" style="background-image:url('../static/atendentes.png');">
+          <div>
+            <h3>Atendentes Virtuais</h3>
+            <p>Robôs de IA já assumem contato inicial com clientes, solucionando dúvidas sem auxílio humano.</p>
+          </div>
+        </div>
+        <div class="carousel-slide" style="background-image:url('../static/emocoes.png');">
+          <div>
+            <h3>Análise de Voz Automatizada</h3>
+            <p>IA avalia emoções em ligações e oferece insights para operadores e gestores.</p>
+          </div>
+        </div>
+        <div class="carousel-slide" style="background-image:url('../static/chatbot.png');">
+          <div>
+            <h3>Chatbots e Automações</h3>
+            <p>Respostas automáticas e roteamento inteligente diminuem chamadas repetitivas.</p>
+          </div>
+        </div>
+        <div class="carousel-slide" style="background-image:url('../static/analise.png');">
+          <div>
+            <h3>Análise Preditiva</h3>
+            <p>Algoritmos prevêm clientes com maior potencial de resposta e melhoram resultados.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-arrow next" id="nextBtn">&#10095;</button>
+    <div class="carousel-nav" id="carousel-nav"></div>
+  </div>
+
+  <div class="impacto-section">
+    <h2>🚀 O impacto da IA no Telemarketing</h2>
+    <p>A Inteligência Artificial redefine o telemarketing, tornando-o mais eficiente, automatizando etapas repetitivas e exigindo dos profissionais uma atuação mais estratégica, com uso inteligente de dados e adaptação contínua às novas tecnologias.</p>
+  </div>
+
+<script>
+  const track = document.getElementById('carousel-track');
+  const slides = Array.from(track.children);
+  const nav = document.getElementById('carousel-nav');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  let curr = 0;
+  let autoSlide;
+
+  function updateClasses() {
+    slides.forEach((slide, i)=>{
+      slide.className = "carousel-slide";
+      if(i === curr) slide.classList.add('active');
+      else if(i === (curr - 1 + slides.length)%slides.length) slide.classList.add('prev');
+      else if(i === (curr + 1)%slides.length) slide.classList.add('next');
+    });
+    nav.querySelectorAll('.carousel-dot').forEach((dot, i)=>dot.classList.toggle('active', i === curr));
+  }
+
+  slides.forEach((_, i) => {
+    let dot = document.createElement('span');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => { curr = i; updateClasses(); resetAutoSlide(); };
+    nav.appendChild(dot);
+  });
+
+  function nextSlide() {
+    curr = (curr + 1) % slides.length;
+    updateClasses();
+  }
+  function prevSlide() {
+    curr = (curr - 1 + slides.length) % slides.length;
+    updateClasses();
+  }
+
+  nextBtn.onclick = () => { nextSlide(); resetAutoSlide(); };
+  prevBtn.onclick = () => { prevSlide(); resetAutoSlide(); };
+
+  function startAutoSlide() {
+    autoSlide = setInterval(nextSlide, 3000);
+  }
+  function resetAutoSlide() {
+    clearInterval(autoSlide);
+    startAutoSlide();
+  }
+
+  updateClasses();
+  startAutoSlide();
+</script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrossel 3D IA Telemarketing</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #ecf3fa;
+      margin: 0;
+      min-height: 100vh;
+    }
+    .carousel-container {
+      max-width: 860px;
+      margin: 40px auto 0;
+      padding: 20px 0 60px;
+      position: relative;
+    }
+    .carousel-viewport {
+      perspective: 1200px;
+      overflow: visible;
+      height: 420px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .carousel-track {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+      position: relative;
+    }
+    .carousel-slide {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%) scale(0.7);
+      opacity: 0.4;
+      transition: 
+        transform 0.7s cubic-bezier(.77,0,.18,1), 
+        opacity 0.5s, 
+        z-index 0.2s;
+      z-index: 1;
+      width: 350px;
+      height: 380px;
+      border-radius: 24px;
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 6px 28px rgba(25,50,100,.25);
+      cursor: pointer;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Overlay para o texto */
+    .carousel-slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      opacity: 0;
+      transition: opacity .4s;
+    }
+    .carousel-slide:hover::before {
+      opacity: 1;
+    }
+
+    .carousel-slide div {
+      position: absolute;
+      text-align: center;
+      color: #fff;
+      opacity: 0;
+      transition: opacity .5s;
+      padding: 20px;
+      z-index: 2;
+    }
+    .carousel-slide:hover div {
+      opacity: 1;
+    }
+
+    .carousel-slide h3 {
+      margin: 0 0 10px;
+      font-size: 1.4em;
+    }
+    .carousel-slide p {
+      font-size: 1em;
+      margin: 0;
+    }
+
+    /* Slide ativo */
+    .carousel-slide.active {
+      transform: translate(-50%,-50%) scale(1) rotateY(0deg);
+      opacity: 1;
+      z-index: 10;
+      box-shadow: 0 10px 42px rgba(33,98,138,.25);
+    }
+    /* Slide anterior */
+    .carousel-slide.prev {
+      transform: translate(-130%,-55%) scale(0.85) rotateY(28deg);
+      opacity: 0.7;
+      z-index: 5;
+    }
+    /* Slide próximo */
+    .carousel-slide.next {
+      transform: translate(30%,-55%) scale(0.85) rotateY(-28deg);
+      opacity: 0.7;
+      z-index: 5;
+    }
+
+    /* Aumentar card no hover (somente no ativo) */
+    .carousel-slide.active:hover {
+      transform: translate(-50%,-50%) scale(1.3) rotateY(0deg);
+      z-index: 15;
+    }
+
+    .carousel-nav {
+      text-align: center;
+      margin-top: 24px;
+    }
+    .carousel-dot {
+      display: inline-block;
+      width: 13px;
+      height: 13px;
+      margin: 0 7px;
+      background: #b4dfef;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .carousel-dot.active {
+      background: #18a0fb;
+      box-shadow: 0 3px 9px #1ba0fb32;
+    }
+
+    /* Setas de navegação */
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      cursor: pointer;
+      font-size: 1.5em;
+      color: #22628a;
+      transition: all .3s;
+      z-index: 20;
+    }
+    .carousel-arrow:hover {
+      background: #18a0fb;
+      color: #fff;
+      transform: translateY(-50%) scale(1.1);
+    }
+    .carousel-arrow.prev { left: -60px; }
+    .carousel-arrow.next { right: -60px; }
+
+    @media (max-width:700px) {
+      .carousel-slide, .carousel-slide.active, .carousel-slide.prev, .carousel-slide.next { width: 95vw; max-width: 360px; }
+      .carousel-arrow.prev { left: 10px; }
+      .carousel-arrow.next { right: 10px; }
+    }
+
+    /* Texto abaixo do carrossel estilizado */
+    .impacto-section {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #18a0fb20, #22628a15);
+      border-radius: 18px;
+      box-shadow: 0 6px 28px rgba(25,50,100,.1);
+    }
+    .impacto-section h2 {
+      font-size: 2em;
+      margin-bottom: 15px;
+      color: #22628a;
+    }
+    .impacto-section p {
+      font-size: 1.15em;
+      line-height: 1.6;
+      color: #37495a;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="carousel-container">
+    <button class="carousel-arrow prev" id="prevBtn">&#10094;</button>
+    <div class="carousel-viewport">
+      <div class="carousel-track" id="carousel-track">
+        <div class="carousel-slide" style="background-image:url('../static/atendentes.png');">
+          <div>
+            <h3>Atendentes Virtuais</h3>
+            <p>Robôs de IA já assumem contato inicial com clientes, solucionando dúvidas sem auxílio humano.</p>
+          </div>
+        </div>
+        <div class="carousel-slide" style="background-image:url('../static/emocoes.png');">
+          <div>
+            <h3>Análise de Voz Automatizada</h3>
+            <p>IA avalia emoções em ligações e oferece insights para operadores e gestores.</p>
+          </div>
+        </div>
+        <div class="carousel-slide" style="background-image:url('../static/chatbot.png');">
+          <div>
+            <h3>Chatbots e Automações</h3>
+            <p>Respostas automáticas e roteamento inteligente diminuem chamadas repetitivas.</p>
+          </div>
+        </div>
+        <div class="carousel-slide" style="background-image:url('../static/analise.png');">
+          <div>
+            <h3>Análise Preditiva</h3>
+            <p>Algoritmos prevêm clientes com maior potencial de resposta e melhoram resultados.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-arrow next" id="nextBtn">&#10095;</button>
+    <div class="carousel-nav" id="carousel-nav"></div>
+  </div>
+
+  <div class="impacto-section">
+    <h2>🚀 O impacto da IA no Telemarketing</h2>
+    <p>A Inteligência Artificial redefine o telemarketing, tornando-o mais eficiente, automatizando etapas repetitivas e exigindo dos profissionais uma atuação mais estratégica, com uso inteligente de dados e adaptação contínua às novas tecnologias.</p>
+  </div>
+
+<script>
+  const track = document.getElementById('carousel-track');
+  const slides = Array.from(track.children);
+  const nav = document.getElementById('carousel-nav');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  let curr = 0;
+  let autoSlide;
+
+  function updateClasses() {
+    slides.forEach((slide, i)=>{
+      slide.className = "carousel-slide";
+      if(i === curr) slide.classList.add('active');
+      else if(i === (curr - 1 + slides.length)%slides.length) slide.classList.add('prev');
+      else if(i === (curr + 1)%slides.length) slide.classList.add('next');
+    });
+    nav.querySelectorAll('.carousel-dot').forEach((dot, i)=>dot.classList.toggle('active', i === curr));
+  }
+
+  slides.forEach((slide, i) => {
+    let dot = document.createElement('span');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => { curr = i; updateClasses(); resetAutoSlide(); };
+    nav.appendChild(dot);
+
+    // Pausar autoplay ao passar o mouse
+    slide.addEventListener('mouseenter', stopAutoSlide);
+    slide.addEventListener('mouseleave', startAutoSlide);
+  });
+
+  function nextSlide() {
+    curr = (curr + 1) % slides.length;
+    updateClasses();
+  }
+  function prevSlide() {
+    curr = (curr - 1 + slides.length) % slides.length;
+    updateClasses();
+  }
+
+  nextBtn.onclick = () => { nextSlide(); resetAutoSlide(); };
+  prevBtn.onclick = () => { prevSlide(); resetAutoSlide(); };
+
+  function startAutoSlide() {
+    stopAutoSlide();
+    autoSlide = setInterval(nextSlide, 3000);
+  }
+  function stopAutoSlide() {
+    clearInterval(autoSlide);
+  }
+  function resetAutoSlide() {
+    stopAutoSlide();
+    startAutoSlide();
+  }
+
+  updateClasses();
+  startAutoSlide();
+</script>
+</body>
+</html>

@@ -27,11 +27,11 @@
                         </a>
                     </div>
                     <ul class="nav-links">
-                        <li><a href="#"> Carreiras do Futuro com IA</a></li>
+                        <li><a href="#intro-card"> Carreiras do Futuro com IA</a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Impacto nas Carreiras</a>
+                            <a class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Impacto nas Carreiras</a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">aristoteles</a></li>
+                                <li><a href="#secao-carrossel">Telemarketing</a></li>
                                 <li><a href="#">gustavo</a></li>
                                 <li><a href="#">hudson</a></li>
                                 <li><a href="#">renato</a></li>
@@ -60,9 +60,70 @@
         <img src="../static/jovem_social3.png" alt="Banner Jovem Programador" class="banner-image">
     </div>
 
+    <!-- Div de introdução sobre o impacto da IA no mercado de trabalho -->
+    <div class="intro-card" id="intro-card">
+        <h1>Carreiras do Futuro com IA</h1>
+        <h2 class="centered">Como a Inteligência Artificial está remodelando o mercado de trabalho</h2>
+
+        <p>A inteligência artificial está transformando profundamente o mercado de trabalho: tarefas digitais e repetitivas passam a ser automatizadas, enquanto funções que exigem análise, comunicação e criatividade se reconfiguram — não para desaparecer, mas para exigir novas habilidades. Profissionais que dominarem dados, empatia aplicada e pensamento estratégico estarão em vantagem.</p>
+
+        <h2>Setores mais afetados</h2>
+        <ul>
+        <li><strong>Saúde:</strong> automação de diagnósticos e análise de grandes volumes de dados clínicos.</li>
+        <li><strong>Educação:</strong> personalização de planos de ensino e tutoria inteligente baseada em desempenho.</li>
+        <li><strong>Varejo e negócios:</strong> análise preditiva do comportamento do cliente e automação do atendimento.</li>
+        <li><strong>Segurança:</strong> monitoramento inteligente para detectar ameaças digitais e físicas em tempo real.</li>
+        <li><strong>Agricultura:</strong> controle de safras, previsão de pragas e otimização de preços via algoritmos.</li>
+        </ul>
+
+        <h2>Profissões menos impactadas</h2>
+        <ul>
+        <li>Tarefas que exigem habilidades manuais ou alta interação humana direta (ex.: massoterapeutas, cirurgiões, técnicos de saúde).</li>
+        <li>Operações pesadas e construção civil (ex.: operadores de máquinas pesadas, pedreiros).</li>
+        <li>Atividades de limpeza, pintura e acabamento que dependem de adaptabilidade manual e contexto.</li>
+        </ul>
+        <p class="note">Observação: muitas profissões não desaparecerão — elas serão <em>transformadas</em>. A chave para a transição é a requalificação: desenvolver competências digitais, pensamento crítico e criatividade para trabalhar ao lado das máquinas.</p>
+    </div>
+
 <!--RENATO-->
+    <div class="carousel-container" id="secao-carrossel">
+        <button class="carousel-arrow prev" id="prevBtn">&#10094;</button>
+        <div class="carousel-viewport">
+            <div class="carousel-track" id="carousel-track">
+                <div class="carousel-slide" style="background-image:url('../static/atendentes.png');">
+                <div>
+                    <h3>Atendentes Virtuais</h3>
+                    <p>Robôs de IA já assumem contato inicial com clientes, solucionando dúvidas sem auxílio humano.</p>
+                </div>
+                </div>
+                <div class="carousel-slide" style="background-image:url('../static/emocoes.png');">
+                <div>
+                    <h3>Análise de Voz Automatizada</h3>
+                    <p>IA avalia emoções em ligações e oferece insights para operadores e gestores.</p>
+                </div>
+                </div>
+                <div class="carousel-slide" style="background-image:url('../static/chatbot.png');">
+                <div>
+                    <h3>Chatbots e Automações</h3>
+                    <p>Respostas automáticas e roteamento inteligente diminuem chamadas repetitivas.</p>
+                </div>
+                </div>
+                <div class="carousel-slide" style="background-image:url('../static/analise.png');">
+                <div>
+                    <h3>Análise Preditiva</h3>
+                    <p>Algoritmos prevêm clientes com maior potencial de resposta e melhoram resultados.</p>
+                </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-arrow next" id="nextBtn">&#10095;</button>
+        <div class="carousel-nav" id="carousel-nav"></div>
+    </div>
 
-
+    <div class="impacto-section">
+        <h2>IA no Telemarketing 🤖</h2>
+        <p>A IA transforma o setor com atendimentos 24h, filas reduzidas e ofertas personalizadas. Chatbots cuidam do básico enquanto algoritmos analisam dados em segundos. Já o profissional humano assume um papel mais estratégico: atuar como consultor de experiência, unindo empatia e tecnologia para criar conexões de verdade.</p>
+    </div>
 <!--FINAL RENATO-->
 
 
@@ -105,6 +166,6 @@
     <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
-    
+    <script src="../js/script.js"></script>
 </body>
 </html>
