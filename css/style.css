@@ -1,31 +1,52 @@
-/*ATENÇÃO! Este é um arquivo de desenvolvimento COLABORATIVO! 
-Antes de realizar alterações verifique se está corretamente no seu ESPAÇO.
-Certifique-se utilizar a boa prática para não duplicar os estilos css desnecessariamente*/
+/*
+ATENÇÃO! ESTE É UM ARQUIVO DE DESENVOLVIMENTO COLABORATIVO.
+ANTES DE REALIZAR ALTERAÇÕES, VERIFIQUE SE ESTÁ CORRETAMENTE NO SEU ESPAÇO.
+CERTIFIQUE-SE DE UTILIZAR AS BOAS PRÁTICAS PARA NÃO DUPLICAR ESTILOS CSS DESNECESSARIAMENTE.
+*/
 
+/* --- VARIÁVEIS DE ESTILO PARA FACILITAR A CUSTOMIZAÇÃO --- */
+:root {
+    --fundo-principal: #eeeef8;
+    --cor-texto-principal: #333;
+    --cor-texto-secundaria: #6c757d;
+    --cor-destaque-principal: #6a0dad; /* Roxo */
+    --cor-destaque-secundaria: #8a2be2; /* Roxo mais claro */
+    --cor-link: #4f8294; /* Cor azul-esverdeada do logo */
+    --fundo-card: #ffffff;
+    --sombra-card: rgba(0, 0, 0, 0.08);
 
+    /* Cores do Banner */
+    --cor-banner-texto: #6a0dad;
+    --cor-banner-destaque: #333;
+}
 
-/*CSS base.html*/
-
-/* Reset básico para remover margens e preenchimentos padrão */
+/* --- ESTILOS GERAIS E RESET --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Estilos Gerais do Corpo */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #eeeef8;
-    color: #e0e0e0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--fundo-principal);
+    color: var(--cor-texto-principal);
     min-height: 100vh;
-    margin: 0;
-    padding: 0px;
-    box-sizing: border-box;
 }
 
-/* CÓDIGO CSS para a navegação */
-/* Seção do banner rosa/roxo */
+html {
+    scroll-behavior: smooth;
+}
+
+:target {
+    scroll-margin-top: 150px;
+}
+
+/* --- NAVEGAÇÃO E BANNER --- */
+.main-header {
+    margin-bottom: 0;
+}
+
 .top-banner {
     height: 5px;
     width: 100%;
@@ -36,13 +57,12 @@ body {
     z-index: 1001;
 }
 
-/* Seção da navegação principal */
 .main-nav {
     position: fixed;
     top: 5px;
     left: 0;
     width: 100%;
-    background-color: #ffffff;
+    background-color: var(--fundo-card);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 1000;
 }
@@ -58,7 +78,7 @@ body {
 
 .logo img {
     height: 89px;
-    margin-top: 6px
+    margin-top: 6px;
 }
 
 .nav-links {
@@ -72,353 +92,657 @@ body {
 }
 
 .nav-links li {
-  margin-right: 5px; /* Espaçamento entre os itens */
+    margin-right: 5px;
 }
 
 .nav-links a {
     font-size: 1.29rem;
     text-decoration: none;
-    color: #2e2d30; 
+    color: var(--cor-texto-principal);
     font-weight: 500;
-    position: relative; /* Essencial para posicionar a linha corretamente */
-    padding-bottom: 5px; /* Adiciona espaço para a linha */
+    position: relative;
+    padding-bottom: 5px;
     transition: color 0.3s ease;
 }
 
-/* Cria a linha invisível */
 .nav-links a::after {
-    content: ''; /* O conteúdo é obrigatório, mesmo que vazio */
+    content: '';
     position: absolute;
-    bottom: 0; /* Posição da linha */
-    left: 50%; /* Começa no centro do link */
-    width: 0; /* Largura inicial da linha */
-    height: 2px; /* Espessura da linha */
-    background-color: #4f8294; /* Cor da linha, use a cor do logo */
-    transition: width 0.3s ease, left 0.3s ease; /* Anima a largura e a posição */
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--cor-link);
+    transition: width 0.3s ease, left 0.3s ease;
 }
 
-/* Animação no hover */
 .nav-links a:hover {
-    color: #4f8294; /* Altera a cor do texto para combinar com a linha */
+    color: var(--cor-link);
 }
 
 .nav-links a:hover::after {
-    width: 100%; /* Aumenta a largura da linha para 100% */
-    left: 0; /* Move a linha para o início do link */
+    width: 100%;
+    left: 0;
 }
 
-/* Estilo para o contêiner do menu suspenso */
+/* Dropdown Menu */
 .dropdown {
-    position: relative; /* Importante para que o menu suspenso seja posicionado em relação a este item */
-    /* Isso cria uma área de segurança para que o mouse não saia */
+    position: relative;
     padding-bottom: 20px;
 }
 
-/* Estilo para o menu suspenso (inicialmente oculto) */
 .dropdown-menu {
-    display: none; /* Esconde o menu por padrão */
-    position: absolute; /* Posição absoluta em relação ao item 'dropdown' */
-    top: 100%; /* Posição logo abaixo do link 'Acessar' */
+    display: none;
+    position: absolute;
+    top: 100%;
     left: 0;
     list-style: none;
-    background-color: #ffffff; /* Fundo branco para os links do dropdown */
+    background-color: var(--fundo-card);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     min-width: 200px;
     padding: 10px 0;
-    /* Adicione um margin negativo para 'puxar' o menu para cima */
-    /* Isso o conecta visualmente ao link pai */
     margin-top: -10px;
 }
 
-/* Estilo para os links dentro do menu suspenso */
 .dropdown-menu li {
     margin: 0;
 }
 
 .dropdown-menu a {
-    display: block; /* Faz o link ocupar toda a largura do item da lista */
+    display: block;
     padding: 10px 20px;
-    white-space: nowrap; /* Evita que o texto quebre para a próxima linha */
+    white-space: nowrap;
 }
 
-/* Exibe o menu suspenso ao passar o mouse sobre o item de navegação */
 .dropdown:hover .dropdown-menu {
     display: block;
 }
-:target {
-    scroll-margin-top: 150px; /* Use a altura do seu cabeçalho aqui */
-}
 
-html {
-    scroll-behavior: smooth;
-}
-/*Final CSS base.html*/
-/*--------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-/*CSS index.html*/
-
+/* --- ESTILOS DO BANNER E FRASE CHAMADA --- */
+/* --- SEÇÃO: BANNER COM EFEITO DE PULSAÇÃO --- */
 .banner_jp {
-    margin-top: 140px;
+    position: relative;
     width: 100%;
+    height: 400px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+/* Posiciona os elementos no mesmo lugar e os torna transparentes por padrão */
+.banner-image,
+.frase-chamada {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
 }
 
 .banner-image {
-    width: 100%; /* Faz a imagem ocupar 100% da largura do seu contêiner pai (.banner_jp) */
-    height: auto; /* Mantém a proporção da imagem para que ela não fique distorcida */
-    display: block; /* Remove o espaço extra abaixo da imagem que alguns navegadores adicionam */
+    object-fit: cover;
+    z-index: 1;
 }
 
+.frase-chamada {
+    z-index: 2;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--cor-banner-texto);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    line-height: 1.2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    /* --- Efeito de Pulsação --- */
+    animation: pulso 2s infinite ease-in-out;
+}
+
+/* Classes para controlar a visibilidade */
+.banner-image.show,
+.frase-chamada.show {
+    opacity: 1;
+}
+
+.frase-chamada .destaque-ia {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--cor-banner-destaque);
+    margin-top: 10px;
+}
+
+/* --- ANIMAÇÃO @keyframes --- */
+@keyframes pulso {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.05); /* Aumenta 5% no meio da animação */
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* --- ESTILOS DAS SEÇÕES DE CONTEÚDO (INTRO-CARD, SOBRE, CARROSSEL) --- */
 .intro-card {
-max-width: 900px;
-margin: 24px auto;
-padding: 20px;
-border-radius: 12px;
-box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-line-height: 1.45;
-background: #ffffff;
+    max-width: 900px;
+    margin: 24px auto;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    background: var(--fundo-card);
 }
 
+.intro-card .card-content {
+    padding: 20px;
+}
 
 .intro-card h1 {
-margin-top: 0;
-font-size: 1.5rem;
-color: #0b3b66;
-text-align: center;
+    font-size: 1.8rem;
+    color: var(--cor-destaque-principal);
+    text-align: center;
 }
 
-
 .intro-card h2 {
-font-size: 1.05rem;
-margin-bottom: 8px;
-color: #0b5978;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    color: var(--cor-destaque-secundaria);
 }
 
 .intro-card h2.centered {
-  text-align: center;
+    text-align: center;
+    font-size: 1.5rem;
 }
-
 
 .intro-card p {
-margin: 12px 0 18px;
-color: #334e68;
+    margin: 12px 0 18px;
+    color: var(--cor-texto-principal);
 }
-
 
 .intro-card ul {
-margin: 0 0 16px 18px;
-color: #2f4f62;
+    margin: 0 0 16px 18px;
+    color: var(--cor-texto-principal);
 }
-
 
 .intro-card .note {
-margin: 0;
-color: #536b7a;
-font-size: 0.95rem;
+    margin: 0;
+    color: var(--cor-destaque-principal);
+    font-size: 0.95rem;
 }
 
-/*Final CSS index.html*/
-/*--------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+.page-section {
+    padding: 80px 0;
+    text-align: center;
+}
 
+.sobre-conteudo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-/*RENATO*/
+.titulo-secao {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--cor-destaque-principal);
+    margin-bottom: 10px;
+}
+
+.subtitulo-secao {
+    font-size: 1.2rem;
+    color: var(--cor-destaque-secundaria);
+    max-width: 600px;
+    margin-bottom: 50px;
+}
+
+/* Grid e Cards */
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.card-info, .card-competicao {
+    background-color: var(--fundo-card);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px var(--sombra-card);
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-info:hover, .card-competicao:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.card-info h3, .card-competicao h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 0;
+    color: var(--cor-destaque-principal);
+}
+
+.card-competicao {
+    text-align: center;
+    border: 2px solid transparent;
+    border-image: linear-gradient(45deg, #8a2be2, #6a11cb);
+    border-image-slice: 1;
+}
+
+.card-competicao p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.data-limite {
+    font-weight: 700;
+    color: var(--cor-destaque-principal);
+}
+
+/* Estilos do Contador */
+.countdown-container {
+    margin-top: 20px;
+}
+
+.timer-display {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--cor-destaque-principal);
+}
+
+/* Carrossel */
 .carousel-container {
-      max-width: 860px;
-      margin: 40px auto 0;
-      padding: 20px 0 60px;
-      position: relative;
+    max-width: 860px;
+    margin: 40px auto 0;
+    padding: 20px 0 60px;
+    position: relative;
+}
+
+.carousel-viewport {
+    perspective: 1200px;
+    overflow: visible;
+    height: 420px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-track {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.carousel-slide {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.7);
+    opacity: 0.4;
+    transition: transform 0.7s cubic-bezier(.77, 0, .18, 1), opacity 0.5s, z-index 0.2s;
+    z-index: 1;
+    width: 350px;
+    height: 380px;
+    border-radius: 24px;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 6px 28px rgba(25, 50, 100, .25);
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-slide::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    opacity: 0;
+    transition: opacity .4s;
+}
+
+.carousel-slide:hover::before {
+    opacity: 1;
+}
+
+.carousel-slide div {
+    position: absolute;
+    text-align: center;
+    color: #fff;
+    opacity: 0;
+    transition: opacity .5s;
+    padding: 20px;
+    z-index: 2;
+}
+
+.carousel-slide:hover div {
+    opacity: 1;
+}
+
+.carousel-slide h3 {
+    margin: 0 0 10px;
+    font-size: 1.4em;
+}
+
+.carousel-slide p {
+    font-size: 1em;
+    margin: 0;
+}
+
+/* Slide ativo */
+.carousel-slide.active {
+    transform: translate(-50%, -50%) scale(1) rotateY(0deg);
+    opacity: 1;
+    z-index: 10;
+    box-shadow: 0 10px 42px rgba(33, 98, 138, .25);
+}
+
+/* Slide anterior */
+.carousel-slide.prev {
+    transform: translate(-130%, -55%) scale(0.85) rotateY(28deg);
+    opacity: 0.7;
+    z-index: 5;
+}
+
+/* Slide próximo */
+.carousel-slide.next {
+    transform: translate(30%, -55%) scale(0.85) rotateY(-28deg);
+    opacity: 0.7;
+    z-index: 5;
+}
+
+/* Aumentar card no hover (somente no ativo) */
+.carousel-slide.active:hover {
+    transform: translate(-50%, -50%) scale(1.3) rotateY(0deg);
+    z-index: 15;
+}
+
+.carousel-nav {
+    text-align: center;
+    margin-top: 24px;
+}
+
+.carousel-dot {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    margin: 0 7px;
+    background: #b4dfef;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background .2s;
+}
+
+.carousel-dot.active {
+    background: #18a0fb;
+    box-shadow: 0 3px 9px #1ba0fb32;
+}
+
+/* Setas de navegação */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    font-size: 1.5em;
+    color: #22628a;
+    transition: all .3s;
+    z-index: 20;
+}
+
+.carousel-arrow:hover {
+    background: #18a0fb;
+    color: #fff;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-arrow.prev {
+    left: -60px;
+}
+
+.carousel-arrow.next {
+    right: -60px;
+}
+
+@media (max-width:700px) {
+    .carousel-slide, .carousel-slide.active, .carousel-slide.prev, .carousel-slide.next {
+        width: 95vw;
+        max-width: 360px;
     }
-    .carousel-viewport {
-      perspective: 1200px;
-      overflow: visible;
-      height: 420px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .carousel-arrow.prev {
+        left: 10px;
     }
-    .carousel-track {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      width: 100%;
-      position: relative;
+    .carousel-arrow.next {
+        right: 10px;
     }
-    .carousel-slide {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%,-50%) scale(0.7);
-      opacity: 0.4;
-      transition: 
-        transform 0.7s cubic-bezier(.77,0,.18,1), 
-        opacity 0.5s, 
-        z-index 0.2s;
-      z-index: 1;
-      width: 350px;
-      height: 380px;
-      border-radius: 24px;
-      background-size: cover;
-      background-position: center;
-      box-shadow: 0 6px 28px rgba(25,50,100,.25);
-      cursor: pointer;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+}
+
+/* Texto abaixo do carrossel estilizado */
+.impacto-section {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #18a0fb20, #22628a15);
+    border-radius: 18px;
+    box-shadow: 0 6px 28px rgba(25, 50, 100, .1);
+}
+
+.impacto-section h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    color: var(--cor-destaque-principal);
+}
+
+.impacto-section p {
+    font-size: 1.15em;
+    line-height: 1.6;
+    color: var(--cor-texto-principal);
+}
+
+/* --- RESPONSIVIDADE GERAL --- */
+@media (max-width: 768px) {
+    .banner_jp {
+        margin-top: 80px;
+        height: 300px;
     }
 
-    /* Overlay para o texto */
-    .carousel-slide::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.55);
-      opacity: 0;
-      transition: opacity .4s;
-    }
-    .carousel-slide:hover::before {
-      opacity: 1;
+    .frase-chamada {
+        font-size: 1.8rem;
     }
 
-    .carousel-slide div {
-      position: absolute;
-      text-align: center;
-      color: #fff;
-      opacity: 0;
-      transition: opacity .5s;
-      padding: 20px;
-      z-index: 2;
-    }
-    .carousel-slide:hover div {
-      opacity: 1;
+    .frase-chamada .destaque-ia {
+        font-size: 1.1rem;
     }
 
-    .carousel-slide h3 {
-      margin: 0 0 10px;
-      font-size: 1.4em;
-    }
-    .carousel-slide p {
-      font-size: 1em;
-      margin: 0;
+    .titulo-secao {
+        font-size: 2rem;
     }
 
-    /* Slide ativo */
-    .carousel-slide.active {
-      transform: translate(-50%,-50%) scale(1) rotateY(0deg);
-      opacity: 1;
-      z-index: 10;
-      box-shadow: 0 10px 42px rgba(33,98,138,.25);
-    }
-    /* Slide anterior */
-    .carousel-slide.prev {
-      transform: translate(-130%,-55%) scale(0.85) rotateY(28deg);
-      opacity: 0.7;
-      z-index: 5;
-    }
-    /* Slide próximo */
-    .carousel-slide.next {
-      transform: translate(30%,-55%) scale(0.85) rotateY(-28deg);
-      opacity: 0.7;
-      z-index: 5;
+    .subtitulo-secao {
+        font-size: 1rem;
+        text-align: center;
     }
 
-    /* Aumentar card no hover (somente no ativo) */
-    .carousel-slide.active:hover {
-      transform: translate(-50%,-50%) scale(1.3) rotateY(0deg);
-      z-index: 15;
+    .grid-layout {
+        grid-template-columns: 1fr;
     }
 
-    .carousel-nav {
-      text-align: center;
-      margin-top: 24px;
+    .card-info, .card-competicao {
+        padding: 30px;
     }
-    .carousel-dot {
-      display: inline-block;
-      width: 13px;
-      height: 13px;
-      margin: 0 7px;
-      background: #b4dfef;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: background .2s;
-    }
-    .carousel-dot.active {
-      background: #18a0fb;
-      box-shadow: 0 3px 9px #1ba0fb32;
-    }
+}
 
-    /* Setas de navegação */
-    .carousel-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: #fff;
-      border: none;
-      border-radius: 50%;
-      width: 45px;
-      height: 45px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      cursor: pointer;
-      font-size: 1.5em;
-      color: #22628a;
-      transition: all .3s;
-      z-index: 20;
-    }
-    .carousel-arrow:hover {
-      background: #18a0fb;
-      color: #fff;
-      transform: translateY(-50%) scale(1.1);
-    }
-    .carousel-arrow.prev { left: -60px; }
-    .carousel-arrow.next { right: -60px; }
+/* --- SEÇÃO: DESENVOLVEDORES --- */
 
-    @media (max-width:700px) {
-      .carousel-slide, .carousel-slide.active, .carousel-slide.prev, .carousel-slide.next { width: 95vw; max-width: 360px; }
-      .carousel-arrow.prev { left: 10px; }
-      .carousel-arrow.next { right: 10px; }
-    }
+/* Novo estilo para o container do título e subtítulo */
+.titulo-cabecalho {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza horizontalmente */
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
 
-    /* Texto abaixo do carrossel estilizado */
-    .impacto-section {
-      max-width: 760px;
-      margin: 0 auto;
-      text-align: center;
-      padding: 40px 20px;
-      background: linear-gradient(135deg, #18a0fb20, #22628a15);
-      border-radius: 18px;
-      box-shadow: 0 6px 28px rgba(25,50,100,.1);
-    }
-    .impacto-section h2 {
-      font-size: 2em;
-      margin-bottom: 15px;
-      color: #6a0dad;
-    }
-    .impacto-section p {
-      font-size: 1.15em;
-      line-height: 1.6;
-      color: #8a2be2;
-    }
-/*Final RENATO*/
+.titulo-secao {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--cor-destaque-principal);
+    margin-bottom: 10px; /* Reduzi a margem para aproximar do subtítulo */
+}
 
+.subtitulo-secao {
+    font-size: 1.2rem;
+    color: var(--cor-destaque-secundaria);
+    margin-bottom: 50px;
+}
 
+.dev-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-top: 50px;
+}
 
-/*HUDSON*/
+.dev-card {
+    background-color: var(--fundo-card);
+    padding: 30px 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px var(--sombra-card);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
+/* Efeito de hover para o card inteiro */
+.dev-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+}
 
-/*Final HUDSON*/
+.dev-photo-wrapper {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid var(--cor-destaque-principal);
+    box-shadow: 0 0 0 7px rgba(106, 13, 173, 0.2);
+    transition: transform 0.4s ease;
+}
 
+/* Efeito de hover na foto: um pequeno salto */
+.dev-card:hover .dev-photo-wrapper {
+    transform: scale(1.08);
+}
 
+.dev-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-/*GUSTAVO*/
+.dev-card h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--cor-destaque-principal);
+    margin: 0 0 5px;
+}
 
+.dev-card p {
+    font-size: 1rem;
+    color: var(--cor-texto-principal);
+    margin: 0;
+}
 
-/*Final GUSTAVO*/
+/* ===== AJUSTES DE RESPONSIVIDADE ===== */
 
+/* Ajusta tipografia geral em telas pequenas */
+@media (max-width: 768px) {
+  h1 {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
+  h2 {
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
+  }
+  p {
+    font-size: clamp(0.9rem, 3.5vw, 1rem);
+  }
+}
 
+/* Banner - Reduz fonte do texto no mobile */
+@media (max-width: 768px) {
+  #banner {
+    padding: 2rem 1rem;
+  }
+  #fraseChamada {
+    font-size: clamp(1rem, 4.5vw, 1.4rem);
+    text-align: center;
+    line-height: 1.3;
+  }
+  #banner img {
+    max-height: 180px;
+  }
+}
 
-/*ARISTOTELES*/
+/* Contador regressivo */
+@media (max-width: 480px) {
+  #countdown {
+    font-size: clamp(1rem, 6vw, 1.4rem);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+}
 
+/* Carrossel - Botões mais internos no mobile */
+@media (max-width: 600px) {
+  .carousel-btn {
+    font-size: 1.5rem;
+    padding: 0.2rem 0.6rem;
+  }
+  #prevBtn {
+    left: 5px;
+  }
+  #nextBtn {
+    right: 5px;
+  }
+}
 
-/*Final ARISTOTELES*/
+/* Footer - Centraliza no mobile */
+@media (max-width: 768px) {
+  footer {
+    text-align: center;
+  }
+  footer .footer-links {
+    flex-direction: column;
+    align-items: center;
+  }
+}
