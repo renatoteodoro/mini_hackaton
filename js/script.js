@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (bannerImage) bannerImage.classList.add('show');
 
     // Alterna o conteúdo a cada 5 segundos
-    setInterval(toggleBannerContent, 5000);
+    setInterval(toggleBannerContent, 7000);
 });
 
 // --- FUNCIONALIDADE 3: CARROSSEL DE SLIDES (RENATO) ---
