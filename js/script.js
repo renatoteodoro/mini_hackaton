@@ -110,3 +110,46 @@ if (track && nav && prevBtn && nextBtn) {
     updateClasses();
     startAutoSlide();
 }
+
+// --- FUNCIONALIDADE 4: MENU RESPONSIVO OTIMIZADO ---
+document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (menuToggle && navLinks) {
+        // Lógica para abrir/fechar o menu ao clicar no botão
+        menuToggle.addEventListener('click', (event) => {
+            // Impede que o evento de clique se propague e feche o menu
+            event.stopPropagation();
+            navLinks.classList.toggle('active');
+            
+            // Alterna o atributo de acessibilidade para leitores de tela
+            const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', !isExpanded);
+        });
+
+        // Lógica para fechar o menu ao clicar fora dele
+        document.addEventListener('click', (event) => {
+            if (!navLinks.contains(event.target) && !menuToggle.contains(event.target)) {
+                navLinks.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // Lógica para fechar o menu ao clicar em um link interno
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // Lógica para resetar o menu se a janela for redimensionada para desktop
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                navLinks.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+});

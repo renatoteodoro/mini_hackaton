@@ -57,6 +57,17 @@ html {
     z-index: 1001;
 }
 
+/* Estilo para o botão do menu hambúrguer */
+.menu-toggle {
+    display: none; /* Escondido por padrão em telas grandes */
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--cor-destaque-principal);
+    z-index: 1002;
+}
+
 .main-nav {
     position: fixed;
     top: 5px;
@@ -588,9 +599,57 @@ html {
     line-height: 1.6;
     color: var(--cor-texto-principal);
 }
-
 /* --- RESPONSIVIDADE GERAL --- */
 @media (max-width: 768px) {
+    /* Exibe o botão do menu hambúrguer */
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none; /* Esconde a lista de links por padrão */
+        flex-direction: column;
+        position: fixed;
+        top: 60px; /* Ajuste para ficar abaixo da barra de navegação */
+        left: 0;
+        width: 100%;
+        background-color: var(--fundo-card);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px 0;
+        z-index: 999;
+        animation: slideInDown 0.5s ease-out; /* Animação opcional */
+    }
+
+    .nav-links.active {
+        display: flex; /* Exibe a lista quando a classe 'active' está presente */
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    .nav-links a {
+        font-size: 1.1rem;
+        padding: 10px 0;
+        display: block;
+    }
+
+    .dropdown-menu {
+        position: static; /* O dropdown não será flutuante no mobile */
+        box-shadow: none;
+        width: 100%;
+    }
+
+    .dropdown:hover .dropdown-menu {
+        display: none; /* Desativa o hover para o dropdown */
+    }
+
+    .dropdown a.dropdown-toggle {
+        display: block; /* Garante que o link do dropdown seja um bloco */
+    }
+
     .banner_jp {
         margin-top: 80px;
         height: 300px;
@@ -604,23 +663,34 @@ html {
         font-size: 1.1rem;
     }
 
-    .titulo-secao {
-        font-size: 2rem;
+    /* Ajuste dos cards para mobile */
+    .intro-card,
+    .impacto-section,
+    .card-competicao {
+        width: 90%;
+        padding: 20px;
     }
 
-    .subtitulo-secao {
-        font-size: 1rem;
-        text-align: center;
-    }
-    
     .grid-layout {
-        /* A regra 'grid-template-columns: 1fr;' foi removida daqui */
-        gap: 20px; /* Altere para um gap menor, se desejar */
+        grid-template-columns: 1fr; /* Força uma única coluna para os cards */
+        gap: 20px;
     }
-    
 
-    .card-info, .card-competicao {
-        padding: 30px;
+    .dev-cards-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    /* Ajustes do carrossel para mobile */
+    .carousel-container {
+        width: 95%;
+    }
+
+    .carousel-arrow.prev {
+        left: 5px;
+    }
+    .carousel-arrow.next {
+        right: 5px;
     }
 }
 
@@ -776,4 +846,41 @@ html {
     flex-direction: column;
     align-items: center;
   }
+}
+
+/* Animação para o menu mobile */
+@keyframes slideInDown {
+    from {
+        transform: translateY(-20%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+@media (min-width: 769px) {
+    /* Garante que o menu de navegação principal seja exibido em desktops */
+    .nav-links {
+        display: flex !important;
+        flex-direction: row !important;
+        position: static !important;
+        top: auto !important;
+        left: auto !important;
+        width: auto !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        animation: none !important;
+    }
+
+    /* Oculta o botão do hambúrguer em telas de desktop */
+    .menu-toggle {
+        display: none !important;
+    }
+
+    /* Garante que o dropdown volte a funcionar como antes em desktops */
+    .dropdown:hover .dropdown-menu {
+        display: block !important;
+    }
 }
