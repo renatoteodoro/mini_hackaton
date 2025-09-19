@@ -600,7 +600,7 @@ html {
     color: var(--cor-texto-principal);
 }
 /* --- RESPONSIVIDADE GERAL --- */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     /* Exibe o botão do menu hambúrguer */
     .menu-toggle {
         display: block;
@@ -644,6 +644,10 @@ html {
 
     .dropdown:hover .dropdown-menu {
         display: none; /* Desativa o hover para o dropdown */
+    }
+
+    .dropdown.open .dropdown-menu {
+        display: block; /* Ativa o dropdown quando a classe 'open' está presente */
     }
 
     .dropdown a.dropdown-toggle {
@@ -691,6 +695,32 @@ html {
     }
     .carousel-arrow.next {
         right: 5px;
+    }
+
+    /* Ajustes para tablets */
+    .intro-card {
+        width: 85%;
+    }
+
+    .impacto-section {
+        width: 85%;
+    }
+
+    .carousel-container {
+        width: 80%;
+    }
+
+    .grid-layout {
+        width: 85%;
+    }
+
+    .card-competicao {
+        width: 85%;
+    }
+
+    .dev-cards-container {
+        grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+        gap: 30px;
     }
 }
 
@@ -785,7 +815,7 @@ html {
 /* ===== AJUSTES DE RESPONSIVIDADE ===== */
 
 /* Ajusta tipografia geral em telas pequenas */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   h1 {
     font-size: clamp(1.5rem, 5vw, 2rem);
   }
@@ -859,7 +889,8 @@ html {
         opacity: 1;
     }
 }
-@media (min-width: 769px) {
+
+@media (min-width: 1025px) {
     /* Garante que o menu de navegação principal seja exibido em desktops */
     .nav-links {
         display: flex !important;

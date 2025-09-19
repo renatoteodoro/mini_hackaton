@@ -133,6 +133,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!navLinks.contains(event.target) && !menuToggle.contains(event.target)) {
                 navLinks.classList.remove('active');
                 menuToggle.setAttribute('aria-expanded', 'false');
+                // Fechar todos os dropdowns
+                navLinks.querySelectorAll('.dropdown').forEach(dropdown => dropdown.classList.remove('open'));
             }
         });
 
@@ -141,15 +143,28 @@ document.addEventListener('DOMContentLoaded', () => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
                 menuToggle.setAttribute('aria-expanded', 'false');
+                // Fechar todos os dropdowns
+                navLinks.querySelectorAll('.dropdown').forEach(dropdown => dropdown.classList.remove('open'));
             });
         });
 
         // Lógica para resetar o menu se a janela for redimensionada para desktop
         window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
+            if (window.innerWidth > 1024) {
                 navLinks.classList.remove('active');
                 menuToggle.setAttribute('aria-expanded', 'false');
+                // Fechar todos os dropdowns
+                navLinks.querySelectorAll('.dropdown').forEach(dropdown => dropdown.classList.remove('open'));
             }
+        });
+
+        // Lógica para toggle dos dropdowns no mobile
+        navLinks.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+            toggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                const dropdown = toggle.closest('.dropdown');
+                dropdown.classList.toggle('open');
+            });
         });
     }
 });
