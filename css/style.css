@@ -219,7 +219,7 @@ html {
 
 .frase-chamada .destaque-ia {
     display: block;
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     font-weight: 400;
     color: var(--cor-banner-destaque);
     margin-top: 10px;
@@ -242,7 +242,6 @@ html {
 
 /* --- ESTILOS DAS SEÇÕES DE CONTEÚDO (INTRO-CARD, SOBRE, CARROSSEL) --- */
 .intro-card {
-    /* max-width: 900px; */
     width: 70%;
     margin: 24px auto;
     margin-top: 200px;
@@ -283,13 +282,23 @@ html {
 .intro-card ul {
     margin: 0 0 16px 18px;
     color: var(--cor-texto-principal);
-    font-size: 1.3rem;
+    font-size: 1.2rem;
 }
 
 .intro-card .note {
     margin: 0;
     color: var(--cor-destaque-principal);
     font-size: 0.95rem;
+}
+
+.intro-card .note:hover{
+    margin: 0;
+    color: var(--cor-destaque-principal);
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: #ba94df 2px solid;
+    border-radius: 12px;
+    padding: 5px;
 }
 
 .page-section {
@@ -356,8 +365,8 @@ html {
     width: 70%; 
 }
 
-.card-competicao p {
-    font-size: 1rem;
+.card-competicao, .card-info p {
+    font-size: 1.3rem;
     margin-bottom: 15px;
 }
 
@@ -379,7 +388,7 @@ html {
 
 /* Carrossel */
 .carousel-container {
-    max-width: 860px;
+    width: 50%;
     margin: 40px auto 0;
     padding: 20px 0 60px;
     position: relative;
