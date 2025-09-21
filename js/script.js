@@ -168,3 +168,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// --Funcionalidade Botao Ler Mais--
+
+const btn = document.getElementById("toggleBtn");
+      const extra = document.querySelector(".read-more");
+      let expanded = false;
+
+      btn.addEventListener("click", () => {
+        expanded = !expanded;
+        extra.style.display = expanded ? "block" : "none";
+        btn.textContent = expanded ? "Mostrar menos" : "Ler mais";
+      });
