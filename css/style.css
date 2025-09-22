@@ -527,7 +527,7 @@ html {
 }
 
 .carousel-dot.active {
-    background: #18a0fb;
+    background: #8a2be2;
     box-shadow: 0 3px 9px #1ba0fb32;
 }
 
@@ -547,10 +547,15 @@ html {
     color: #22628a;
     transition: all .3s;
     z-index: 20;
+
+    /* Propriedades para centralizar */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .carousel-arrow:hover {
-    background: #18a0fb;
+    background: #8a2be2;
     color: #fff;
     transform: translateY(-50%) scale(1.1);
 }
